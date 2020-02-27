@@ -14,8 +14,30 @@ module.exports = {
         loader: "babel-loader",
         exclude: /node-modules/,
         options: {
-          presets: ["@babel/preset-env", "@babel/preset-react"]
+          presets: [
+            [
+              "@babel/preset-env",
+              {
+                targets: [
+                  "last 2 versions",
+                  "not dead",
+                  "not < 2%",
+                  "not ie 11"
+                ]
+              }
+            ],
+            "@babel/preset-react"
+          ],
+          plugins: [
+            "react-hot-loader/babel",
+            "@babel/plugin-proposal-class-properties"
+          ]
         }
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        exclude: /node_modules/
       }
     ]
   },
